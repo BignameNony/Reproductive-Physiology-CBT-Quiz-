@@ -1,0 +1,122 @@
+body {
+  background-color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.login-container, .exam-container {
+  background: #fff;
+  padding: 40px;
+  max-width: 900px;
+  width: 95%;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  text-align: center;
+  font-size: 18px;
+}
+
+.login-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login-container h2 {
+  font-size: 22px;
+  margin: 5px 0;
+}
+
+.author {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 14px;
+  width: 70%;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#startBtn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#startBtn:hover {
+  background-color: darkgreen;
+}
+
+button {
+  border: none;
+  padding: 14px 30px;
+  margin: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#prevBtn, #nextBtn {
+  background-color: green;
+  color: white;
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  background-color: darkgreen;
+}
+
+#submitBtn {
+  background-color: red;
+  color: white;
+}
+
+#submitBtn:hover {
+  background-color: darkred;
+}
+
+#question-container p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#question-container div {
+  margin: 12px 0;
+  text-align: left;
+  font-size: 18px;
+}
+
+#result {
+  font-size: 20px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+#review {
+  margin-top: 30px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 20px;
+}
