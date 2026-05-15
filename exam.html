@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reproductive Physiology Quiz CBT by Eze Mary</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="exam-container">
+    <h2 id="welcome"></h2>
+
+    <!-- Timer -->
+    <p id="timer"></p>
+
+    <!-- Questions -->
+    <div id="question-container"></div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <button id="prevBtn" onclick="prevQuestion()">Previous</button>
+      <button id="nextBtn" onclick="nextQuestion()">Next</button>
+      <button id="submitBtn" onclick="submitExam()">Submit</button>
+    </div>
+
+    <!-- Results -->
+    <p id="result"></p>
+    <div id="review"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Which of these is not a primary female sex hormone?", options: ["A. Estrogen", "B. Progesterone", "C. All of the above", "D. None of the above"], answer: "C" },
+      { q: "Which organ secretes female sex hormones?", options: ["A. Testes", "B. Fallopian tubes", "C. Ovary", "D. Oviduct"], answer: "C" },
+      { q: "The primary sex organ in female reproductive system is", options: ["A. Uterus", "B. Ovary", "C. Vagina", "D. Cervix"], answer: "B" }
+      // … add more questions here …
+    ];
+
+    let current = 0;
+    let answers = new Array(questions.length).fill(null);
+    document.getElementById("welcome").innerText = "Welcome, " + localStorage.getItem("username");
+
+    function selectOption(letter) { answers[current] = letter; }
+
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("question-container").innerHTML = `
+        <p><strong>Question ${current + 1}:</strong> ${q.q}</p>
+        ${q.options.map(opt => `
+          <div>
+            <input type='radio' name='option' onclick='selectOption("${opt.charAt(0)}")'
+              ${answers[current] === opt.charAt(0) ? "checked" : ""}>
+            ${opt}
+          </div>`).join("")}
+      `;
+    }
+
+    function nextQuestion() { if (current < questions.length - 1) current++; showQuestion(); }
+    function prevQuestion() { if (current > 0) current--; showQuestion(); }
+
+    function submitExam() {
+      let score = 0;
+      for (let i = 0; i < questions.length; i++) {
+        if (answers[i] === questions[i].answer) score++;
+      }
+      let feedback = score >= 2 ? "🌟 Excellent!" : score >= 1 ? "👍 Good job!" : "📘 Try Again.";
+      document.getElementById("result").innerHTML = `You scored ${score} out of ${questions.length}.<br>${feedback}`;
+      let reviewHTML = "<h3>Review:</h3>";
+      for (let i = 0; i < questions.length; i++) {
+        reviewHTML += `<p><strong>Q${i+1}:</strong> ${questions[i].q}<br>Your answer: ${answers[i] || "None"}<br>Correct answer: ${questions[i].answer}</p>`;
+      }
+      document.getElementById("review").innerHTML = reviewHTML;
+    }
+
+    // Timer setup (30 minutes = 1800 seconds)
+    let timeLeft = 1800;
+    let timerElement = document.getElementById("timer");
+
+    function updateTimer() {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      timerElement.innerHTML = `⏳ Time Remaining: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        alert("Time is up! Submitting your exam...");
+        submitExam();
+      }
+      timeLeft--;
+    }
+
+    let timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Show the first question when the page loads
+    showQuestion();
+  </script>
+</body>
+</html>
